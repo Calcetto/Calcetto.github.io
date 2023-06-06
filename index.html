@@ -108,7 +108,11 @@ input[type="text"] {
   max-width: 100%; /* Assicurati che l'immagine non superi la larghezza del suo contenitore */
 }
 }
-
+@media (orientation: portrait) {
+    body {
+      display: none;
+    }
+  }
 
 
   </style>
@@ -135,12 +139,19 @@ input[type="text"] {
   <p id="messaggio">Numero massimo raggiunto per entrambe le squadre.</p>
 
   <script>
- window.addEventListener("orientationchange", function() {
-  if (window.orientation === 0 || window.orientation === 180) {
-    // Dispositivo in modalità verticale, reindirizza alla pagina di blocco
-    window.location.href = "orizzontale.html";
+       function checkOrientation() {
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      window.location.href = "orizzontale.html";
+    }
   }
-});
+
+  // Esegui il controllo iniziale sull'orientamento
+  checkOrientation();
+
+  // Aggiungi un listener per rilevare i cambiamenti di orientamento
+  window.addEventListener("orientationchange", function () {
+    checkOrientation();
+  });
 
     var squadraAttuale = 1;
     

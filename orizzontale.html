@@ -40,5 +40,21 @@
     <div class="message">
       <h1>Visualizzazione Orizzontale Richiesta</h1>
       <p>Frocio di merda metti in orizzontale</p>
+      <script>
+        function checkOrientation() {
+     if (window.matchMedia("(orientation: landscape)").matches) {
+       window.location.href = "index.html";
+     }
+   }
+ 
+   // Esegui il controllo iniziale sull'orientamento
+   checkOrientation();
+ 
+   // Aggiungi un listener per rilevare i cambiamenti di orientamento
+   window.addEventListener("orientationchange", function () {
+     checkOrientation();
+   });
+   </script>
+ 
 </body>
 </html>
