@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
   <title>Pagina con casella di testo e pulsanti</title>
   <style>
     body {
@@ -65,15 +67,57 @@
       height: auto; /* L'altezza si adatta proporzionalmente alla larghezza */
       margin: 0 auto 10px; /* Margini: 0 in alto e in basso, auto lateralmente */
     }
-    
+    @media (max-width: 1000px) {
+  body {
+    font-size: 10px; /* Riduci la dimensione del testo per dispositivi mobili */
+  }
+  
+  .container {
+    width: 70%; /* Riduci la larghezza del contenitore per adattarsi allo schermo */
+    margin: 1 auto; /* Centra il contenitore orizzontalmente */
+    margin-top: -10px;
+  }
+  
+  .squadra {
+    display: flex; /* Utilizza un layout flessibile per le squadre */
+    flex-direction: column; /* Disponi le squadre in colonna per dispositivi mobili */
+}
+  
+  .squadra ul {
+    padding-inline-start: 10px; /* Aggiungi un padding ai lati dell'elenco puntato */
+  }
+  
+  .squadra h2 {
+    text-align: center; /* Centra il titolo della squadra */
+  }
+  /* Stili per i pulsanti */
+button, input[type="button"] {
+  font-size: 14px; /* Riduci la dimensione del testo dei pulsanti */
+  padding: 5px 10px; /* Riduci il padding dei pulsanti */
+}
+
+/* Stile per la casella di testo */
+input[type="text"] {
+  font-size: 14px; /* Riduci la dimensione del testo della casella di testo */
+  padding: 5px; /* Riduci il padding della casella di testo */
+}
+.immagine-persona {
+  width: 35px; /* Riduci la larghezza desiderata */
+  height: 43px; /* L'altezza si adatta proporzionalmente alla larghezza */
+  margin-left: 10px; /* Aggiungi un margine a sinistra dell'immagine */
+  max-width: 100%; /* Assicurati che l'immagine non superi la larghezza del suo contenitore */
+}
+}
+
+
 
   </style>
 </head>
 <body background="IMMAGINI/football-field-soccer-field-background_64749-3516.avif">
   <input type="text" id="inputText" maxlength="10">
-  <button onclick="aggiungiElemento()">Aggiungi</button>
+  <button id="aggiungi" onclick="aggiungiElemento()">Aggiungi</button>
   <button onclick="cambiaSquadra()">Cambia Squadra</button>
-   
+ 
   <div class="container">
     <div class="squadra">
       <h3>Squadra 1</h3>
@@ -91,6 +135,13 @@
   <p id="messaggio">Numero massimo raggiunto per entrambe le squadre.</p>
 
   <script>
+ window.addEventListener("orientationchange", function() {
+  if (window.orientation === 0 || window.orientation === 180) {
+    // Dispositivo in modalità verticale, reindirizza alla pagina di blocco
+    window.location.href = "orizzontale.html";
+  }
+});
+
     var squadraAttuale = 1;
     
     var immaginiPersone = {
