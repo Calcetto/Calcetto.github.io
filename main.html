@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pagina con casella di testo e pulsanti</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      font-size: 20px;
+      background-image: url("IMMAGINI/campo.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+   
+    input[type="text"], button {
+      margin-bottom: 10px;
+      font-size: 20px;
+      padding: 5px;
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    .squadra {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: transparent;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 0;
+    }
+    
+    #messaggio {
+      display: none;
+      color: red;
+      font-size: 18px;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      color: aliceblue;
+    }
+    
+    .container > div {
+      margin: 10px;
+    }
+    #indiceSquadra{
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .immagine-persona {
+      display: block; /* Imposta l'immagine come elemento di blocco */
+      width: 50px; /* Regola la larghezza desiderata */
+      height: auto; /* L'altezza si adatta proporzionalmente alla larghezza */
+      margin: 0 auto 10px; /* Margini: 0 in alto e in basso, auto lateralmente */
+    }
+    
+
+  </style>
+</head>
+<body background="IMMAGINI/football-field-soccer-field-background_64749-3516.avif">
+  <input type="text" id="inputText" maxlength="10">
+  <button onclick="aggiungiElemento()">Aggiungi</button>
+  <button onclick="cambiaSquadra()">Cambia Squadra</button>
+   
+  <div class="container">
+    <div class="squadra">
+      <h3>Squadra 1</h3>
+      <ul id="lista1"></ul>
+    </div>
+    <p id="indiceSquadra">Squadra selezionata: 1</p>
+    
+    <div class="squadra">
+      <h3>Squadra 2</h3>
+      <ul id="lista2"></ul>
+    </div>
+  </div>
+  
+  
+  <p id="messaggio">Numero massimo raggiunto per entrambe le squadre.</p>
+
+  <script>
+    var squadraAttuale = 1;
+    
+    var immaginiPersone = {
+  "Mateo": "IMMAGINI/mateo.jpg",
+  "Davide": "IMMAGINI/davide.jpg",
+  "Luca": "IMMAGINI/luca.jpg",
+  "Saymon": "IMMAGINI/antonio.jpg",
+  "Antonio": "IMMAGINI/antonio.jpg",
+  "Dario": "IMMAGINI/Dario.jpg",
+  "Ture": "IMMAGINI/Ture.jpg",
+  "Mario": "IMMAGINI/antonio.jpg",
+  "Verduci": "IMMAGINI/Verudci.jpg",
+  "Pietro": "IMMAGINI/Pietro.jpg",
+  "Samuele": "IMMAGINI/Samuele.jpg",
+  "Gabriele": "IMMAGINI/Gabriele.jpg",
+  "Paladino": "IMMAGINI/Paladino.jpg",
+  // Aggiungi altre associazioni nome-immagine per le persone
+};
+
+function aggiungiElemento() {
+  var input = document.getElementById("inputText");
+  var valore = input.value.trim();
+  if (valore !== "") {
+    var lista;
+    
+    if (squadraAttuale === 1) {
+      lista = document.getElementById("lista1");
+    } else {
+      lista = document.getElementById("lista2");
+    }
+    
+    var messaggio = document.getElementById("messaggio");
+    
+    if (lista.getElementsByTagName("li").length >= 5) {
+      messaggio.style.display = "block";
+    } else {
+      if (messaggio.style.display === "block") {
+        messaggio.style.display = "none";
+      }
+      
+      var nuovoElemento = document.createElement("li");
+      
+      // Crea un elemento di testo per il nome
+      var nomeElemento = document.createTextNode(valore);
+      nuovoElemento.appendChild(nomeElemento);
+      
+      // Controlla se il nome è presente nell'oggetto immaginiPersone
+      if (immaginiPersone.hasOwnProperty(valore)) {
+        var immaginePersona = document.createElement("img");
+        immaginePersona.src = immaginiPersone[valore];
+        immaginePersona.alt = valore;
+        immaginePersona.classList.add("immagine-persona");
+        nuovoElemento.appendChild(immaginePersona);
+      }
+      
+      lista.appendChild(nuovoElemento);
+      input.value = "";
+    }
+  }
+}
+    function cambiaSquadra() {
+      squadraAttuale = (squadraAttuale === 1) ? 2 : 1;
+      var indiceSquadra = document.getElementById("indiceSquadra");
+       indiceSquadra.textContent = "Squadra selezionata: " + squadraAttuale;
+    }
+
+  </script>
+</body>
+</html>
