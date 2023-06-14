@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
   <title>Pagina con casella di testo e pulsanti</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -27,78 +26,22 @@
    <p id="messaggio">Numero massimo raggiunto per entrambe le squadre.</p>
 </div>
 <div id="warning-message">
-    <h1 style="font-size: xx-large; color: rgb(234, 234, 234);">Visualizzazione Orizzontale Richiesta</h1>
-      <p style="color: azure; font-size: xx-large;">Frocio di merda metti in orizzontale</p>
+    <h1>Visualizzazione Orizzontale Richiesta</h1>
       <img id="imagew" src="mateo.png" alt="mateo">
 </div>
+<button id="apriFinestraBtn">Aggiungi Nome con Foto</button>
+<div id="finestraModale" class="finestra-modale">
+  <div class="contenuto-finestra-modale">
+    <h2 style="color: white;">Inserisci Nome con Foto</h2>
+    <!-- CONTENUTO PERSONALIZZATO -->
+    <input type="text" id="nomeInput" placeholder="Inserisci il nome">
+    <input type="file" id="fotoInput">
+    <button id="salvaBtn">aggiungi</button>
+    <!-- FINE CONTENUTO PERSONALIZZATO -->
+    <button id="chiudiFinestraBtn">Chiudi</button>
+  </div>
+</div>
 
-  <script>
-    var squadraAttuale = 1;
-    
-    var immaginiPersone = {
-  "Mateo": "IMMAGINI/mateo.jpg",
-  "Davide": "IMMAGINI/davide.jpg",
-  "Luca": "IMMAGINI/luca.jpg",
-  "Saymon": "IMMAGINI/antonio.jpg",
-  "Antonio": "IMMAGINI/antonio.jpg",
-  "Dario": "IMMAGINI/Dario.jpg",
-  "Ture": "IMMAGINI/Ture.jpg",
-  "Mario": "IMMAGINI/antonio.jpg",
-  "Verduci": "IMMAGINI/Verudci.jpg",
-  "Pietro": "IMMAGINI/Pietro.jpg",
-  "Samuele": "IMMAGINI/Samuele.jpg",
-  "Gabriele": "IMMAGINI/Gabriele.jpg",
-  "Paladino": "IMMAGINI/Paladino.jpg",
-  // Aggiungi altre associazioni nome-immagine per le persone
-};
-
-function aggiungiElemento() {
-  var input = document.getElementById("inputText");
-  var valore = input.value.trim();
-  if (valore !== "") {
-    var lista;
-    
-    if (squadraAttuale === 1) {
-      lista = document.getElementById("lista1");
-    } else {
-      lista = document.getElementById("lista2");
-    }
-    
-    var messaggio = document.getElementById("messaggio");
-    
-    if (lista.getElementsByTagName("li").length >= 5) {
-      messaggio.style.display = "block";
-    } else {
-      if (messaggio.style.display === "block") {
-        messaggio.style.display = "none";
-      }
-      
-      var nuovoElemento = document.createElement("li");
-      
-      // Crea un elemento di testo per il nome
-      var nomeElemento = document.createTextNode(valore);
-      nuovoElemento.appendChild(nomeElemento);
-      
-      // Controlla se il nome è presente nell'oggetto immaginiPersone
-      if (immaginiPersone.hasOwnProperty(valore)) {
-        var immaginePersona = document.createElement("img");
-        immaginePersona.src = immaginiPersone[valore];
-        immaginePersona.alt = valore;
-        immaginePersona.classList.add("immagine-persona");
-        nuovoElemento.appendChild(immaginePersona);
-      }
-      
-      lista.appendChild(nuovoElemento);
-      input.value = "";
-    }
-  }
-}
-    function cambiaSquadra() {
-      squadraAttuale = (squadraAttuale === 1) ? 2 : 1;
-      var indiceSquadra = document.getElementById("indiceSquadra");
-       indiceSquadra.textContent = "Squadra selezionata: " + squadraAttuale;
-    }
-
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
