@@ -2,132 +2,12 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
   <title>Pagina con casella di testo e pulsanti</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-      font-size: 20px;
-      background-image: url("IMMAGINI/campo.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-   
-    input[type="text"], button {
-      margin-bottom: 10px;
-      font-size: 20px;
-      padding: 5px;
-      background-color: #f1f1f1;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    
-    .squadra {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: transparent;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-      margin: 0;
-    }
-    
-    #messaggio {
-      display: none;
-      color: red;
-      font-size: 18px;
-    }
-    
-    .container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      color: aliceblue;
-    }
-    
-    .container > div {
-      margin: 10px;
-    }
-    #indiceSquadra{
-      margin: 0;
-      font-weight: bold;
-    }
-
-    .immagine-persona {
-      display: block; /* Imposta l'immagine come elemento di blocco */
-      width: 50px; /* Regola la larghezza desiderata */
-      height: auto; /* L'altezza si adatta proporzionalmente alla larghezza */
-      margin: 0 auto 10px; /* Margini: 0 in alto e in basso, auto lateralmente */
-    }
-    @media (max-width: 1000px) {
-  body {
-    font-size: 10px; /* Riduci la dimensione del testo per dispositivi mobili */
-  }
-  
-  .container {
-    width: 70%; /* Riduci la larghezza del contenitore per adattarsi allo schermo */
-    margin: 1 auto; /* Centra il contenitore orizzontalmente */
-    margin-top: -10px;
-  }
-  
-  .squadra {
-    display: flex; /* Utilizza un layout flessibile per le squadre */
-    flex-direction: column; /* Disponi le squadre in colonna per dispositivi mobili */
-}
-  
-  .squadra ul {
-    padding-inline-start: 10px; /* Aggiungi un padding ai lati dell'elenco puntato */
-  }
-  
-  .squadra h2 {
-    text-align: center; /* Centra il titolo della squadra */
-  }
-  /* Stili per i pulsanti */
-button, input[type="button"] {
-  font-size: 14px; /* Riduci la dimensione del testo dei pulsanti */
-  padding: 5px 10px; /* Riduci il padding dei pulsanti */
-}
-
-/* Stile per la casella di testo */
-input[type="text"] {
-  font-size: 14px; /* Riduci la dimensione del testo della casella di testo */
-  padding: 5px; /* Riduci il padding della casella di testo */
-}
-.immagine-persona {
-  width: 35px; /* Riduci la larghezza desiderata */
-  height: 43px; /* L'altezza si adatta proporzionalmente alla larghezza */
-  margin-left: 10px; /* Aggiungi un margine a sinistra dell'immagine */
-  max-width: 100%; /* Assicurati che l'immagine non superi la larghezza del suo contenitore */
-}
-}
-#warning-message { display: none; }
-    @media only screen and (orientation:portrait){
-        #wrapper { display:none; }
-        #warning-message { display:block; }
-    }
-    @media only screen and (orientation:landscape){
-        #warning-message { display:none; }
-    }
-    #imagew{
-      width: 100%;
-      height: 80%;
-    }
-
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div id="wrapper">
-  <!-- your html for your website -->
-   <input type="text" id="inputText" maxlength="10">
+  <input type="text" id="inputText" maxlength="10">
   <button id="aggiungi" onclick="aggiungiElemento()">Aggiungi</button>
   <button onclick="cambiaSquadra()">Cambia Squadra</button>
  
@@ -146,81 +26,22 @@ input[type="text"] {
    <p id="messaggio">Numero massimo raggiunto per entrambe le squadre.</p>
 </div>
 <div id="warning-message">
-    <h1 style="font-size: xx-large; color: rgb(234, 234, 234);">Visualizzazione Orizzontale Richiesta</h1>
-      <p style="color: azure; font-size: xx-large;">Frocio di merda metti in orizzontale</p>
+    <h1>Visualizzazione Orizzontale Richiesta</h1>
       <img id="imagew" src="mateo.png" alt="mateo">
 </div>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8150812227915020"
-     crossorigin="anonymous"></script>
+<button id="apriFinestraBtn">Aggiungi Nome con Foto</button>
+<div id="finestraModale" class="finestra-modale">
+  <div class="contenuto-finestra-modale">
+    <h2 style="color: white;">Inserisci Nome con Foto</h2>
+    <!-- CONTENUTO PERSONALIZZATO -->
+    <input type="text" id="nomeInput" placeholder="Inserisci il nome">
+    <input type="file" id="fotoInput">
+    <button id="salvaBtn">aggiungi</button>
+    <!-- FINE CONTENUTO PERSONALIZZATO -->
+    <button id="chiudiFinestraBtn">Chiudi</button>
+  </div>
+</div>
 
-  <script>
-
-    var squadraAttuale = 1;
-    
-    var immaginiPersone = {
-  "Mateo": "IMMAGINI/mateo.jpg",
-  "Davide": "IMMAGINI/davide.jpg",
-  "Luca": "IMMAGINI/luca.jpg",
-  "Saymon": "IMMAGINI/antonio.jpg",
-  "Antonio": "IMMAGINI/antonio.jpg",
-  "Dario": "IMMAGINI/Dario.jpg",
-  "Ture": "IMMAGINI/Ture.jpg",
-  "Mario": "IMMAGINI/antonio.jpg",
-  "Verduci": "IMMAGINI/Verudci.jpg",
-  "Pietro": "IMMAGINI/Pietro.jpg",
-  "Samuele": "IMMAGINI/Samuele.jpg",
-  "Gabriele": "IMMAGINI/Gabriele.jpg",
-  "Paladino": "IMMAGINI/Paladino.jpg",
-  // Aggiungi altre associazioni nome-immagine per le persone
-};
-
-function aggiungiElemento() {
-  var input = document.getElementById("inputText");
-  var valore = input.value.trim();
-  if (valore !== "") {
-    var lista;
-    
-    if (squadraAttuale === 1) {
-      lista = document.getElementById("lista1");
-    } else {
-      lista = document.getElementById("lista2");
-    }
-    
-    var messaggio = document.getElementById("messaggio");
-    
-    if (lista.getElementsByTagName("li").length >= 5) {
-      messaggio.style.display = "block";
-    } else {
-      if (messaggio.style.display === "block") {
-        messaggio.style.display = "none";
-      }
-      
-      var nuovoElemento = document.createElement("li");
-      
-      // Crea un elemento di testo per il nome
-      var nomeElemento = document.createTextNode(valore);
-      nuovoElemento.appendChild(nomeElemento);
-      
-      // Controlla se il nome è presente nell'oggetto immaginiPersone
-      if (immaginiPersone.hasOwnProperty(valore)) {
-        var immaginePersona = document.createElement("img");
-        immaginePersona.src = immaginiPersone[valore];
-        immaginePersona.alt = valore;
-        immaginePersona.classList.add("immagine-persona");
-        nuovoElemento.appendChild(immaginePersona);
-      }
-      
-      lista.appendChild(nuovoElemento);
-      input.value = "";
-    }
-  }
-}
-    function cambiaSquadra() {
-      squadraAttuale = (squadraAttuale === 1) ? 2 : 1;
-      var indiceSquadra = document.getElementById("indiceSquadra");
-       indiceSquadra.textContent = "Squadra selezionata: " + squadraAttuale;
-    }
-
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
